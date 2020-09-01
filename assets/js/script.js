@@ -147,8 +147,8 @@ $(".list-group").on("change", "input[type='text']", function() {
   var status = $(this).closest(".list-group").attr("id").replace("list-", "");
   var index = $(this).closest(".list-group-item").index();
 
-  tasks[status][index].date = date;
-  saveTasks();
+  // tasks[status][index].date = date;
+  // saveTasks();
 
   var taskSpan = $("<span>").addClass("badge badge-primary badge-pill").text(date);
   $(this).replaceWith(taskSpan);
@@ -237,6 +237,12 @@ var auditTask = function(taskEl) {
     $(taskEl).addClass("list-group-item-warning");
   }
 };
+
+setInterval(function () {
+  $(".card .list-group-item").each(function (el) {
+    auditTask(el);
+  });
+}, 5000);
 
 // load tasks for the first time
 loadTasks();
